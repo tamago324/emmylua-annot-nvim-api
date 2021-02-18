@@ -1,0 +1,67 @@
+*emmylua-annot-nvim-api*
+
+
+==============================================================================
+INTRODUCTION                             *emmylua-annot-nvim-api-introduction*
+
+Enables the use of EmmyLua's annotation feature for Neovim api functions.
+
+
+==============================================================================
+REQUIREMENTS                             *emmylua-annot-nvim-api-requirements*
+
+* Neovim
+
+
+==============================================================================
+INTERFACE                                   *emmylua-annot-nvim-api-interface*
+
+
+------------------------------------------------------------------------------
+FUNCTIONS                                   *emmylua-annot-nvim-api-functions*
+
+                                      *emmylua_annot_nvim_api#gen_meta_file()*
+emmylua_annot_nvim_api#gen_meta_file()
+    Generate a meta file.
+
+                                      *emmylua_annot_nvim_api#get_meta_path()*
+emmylua_annot_nvim_api#get_meta_path()
+    Return |g:emmylua_annot_nvim_api#meta_path|.
+
+------------------------------------------------------------------------------
+VARIABLES                                   *emmylua-annot-nvim-api-variables*
+
+g:emmylua_annot_nvim_api#meta_path        *g:emmylua_annot_nvim_api#meta_path*
+    Specify the directory where the EmmyLua annotation meta files are saved
+    Type: |String|
+    Default: `stdpath("config") .. '/.emmylua_annot_nvim_api/meta'`
+
+
+------------------------------------------------------------------------------
+COMMANDS                                    *emmylua-annot-nvim-api-functions*
+
+EmmyLuaAnnotGenMetaFile                              *EmmyLuaAnnotGenMetaFile*
+    Now, a file with the path `{meta_path}/LuaJIT en-us/vim.lua` will be
+    generated.
+
+
+==============================================================================
+EXAMPLES                                     *emmylua-annot-nvim-api-examples*
+
+Configure with lspconfig: >
+    require'lspconfig'.sumneko_lua.setup{
+      on_attach = on_attach,
+      cmd = {
+        '/path/to/server/bin/Linux/lua-language-server',
+        '-E',
+        '/path/to/server/main.lua',
+        -- Specifies the meta path.
+        '--metapath=' .. vim.fn['emmylua_annot_nvim_api#get_meta_path']()
+      },
+      ...
+    }
+<
+
+
+==============================================================================
+vim:tw=78:sw=4:sts=4:ts=4:ft=help:norl:et
